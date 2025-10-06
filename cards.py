@@ -10,9 +10,10 @@ import io
 import os
 
 class PDFCardGenerator:
-    def __init__(self, input_folder="input", output_folder="output", output_filename="cards.pdf"):
+    def __init__(self, input_folder="input", output_folder="output", output_filename="cards.pdf", gap=1 * mm):
         self.input_folder = input_folder
         self.output_folder = output_folder
+        self.gap = gap
         
         # Create folders if they don't exist
         os.makedirs(input_folder, exist_ok=True)
@@ -203,16 +204,28 @@ class PDFCardGenerator:
         # Draw transport icons (right side, middle)
         if 'transport' in card_data:
             try:
-                icon_size = 0.5 * cm
-                icon_x = x + self.card_width - icon_size - 0.2 * cm
-                icon_start_y = y + self.card_height / 2 - icon_size
-                
+                icon_size = 0.8 * cm
                 transport_count = card_data.get('transport_count', 2)
+                
+                # Center horizontally in the right sidebar
+                sidebar_width = self.card_width - self.img_width
+                icon_x = x + self.img_width + (sidebar_width - icon_size) / 2
+
+                # Center vertically in the right sidebar
+                icon_spacing = 0.1 * cm
+                total_icon_height = transport_count * icon_size + (transport_count - 1) * icon_spacing
+                sidebar_y_start = y + self.card_height - self.img_height
+                icon_start_y = sidebar_y_start + (self.img_height - total_icon_height) / 2 + total_icon_height - icon_size - 0.5 * cm
+
                 transport_path = self.get_image_path(card_data['transport'])
                 for i in range(transport_count):
-                    icon_y = icon_start_y - (i * (icon_size + 0.1 * cm))
-                    c.drawImage(transport_path, icon_x, icon_y,
-                              width=icon_size, height=icon_size, preserveAspectRatio=True)
+                    icon_y = icon_start_y - (i * (icon_size + icon_spacing))
+                    c.saveState()
+                    c.translate(icon_x + icon_size / 2, icon_y + icon_size / 2)
+                    c.rotate(90)
+                    c.drawImage(transport_path, -icon_size / 2, -icon_size / 2,
+                                  width=icon_size, height=icon_size, preserveAspectRatio=True)
+                    c.restoreState()
             except Exception as e:
                 print(f"Error loading transport icon {card_data['transport']}: {e}")
         
@@ -224,9 +237,11 @@ class PDFCardGenerator:
         """Generate PDF from cards data"""
         c = canvas.Canvas(self.output_filename, pagesize=landscape(A4))
         
+        gap = self.gap
+
         # Calculate margins to center the grid
-        total_width = self.cards_per_row * self.card_width
-        total_height = self.cards_per_col * self.card_height
+        total_width = self.cards_per_row * self.card_width + (self.cards_per_row - 1) * gap
+        total_height = self.cards_per_col * self.card_height + (self.cards_per_col - 1) * gap
         margin_x = (self.page_width - total_width) / 2
         margin_y = (self.page_height - total_height) / 2
         
@@ -238,8 +253,8 @@ class PDFCardGenerator:
             col = page_card_idx % self.cards_per_row
             
             # Calculate card position (from bottom-left)
-            x = margin_x + col * self.card_width
-            y = margin_y + (self.cards_per_col - 1 - row) * self.card_height
+            x = margin_x + col * (self.card_width + gap)
+            y = margin_y + (self.cards_per_col - 1 - row) * (self.card_height + gap)
             
             # Draw the card
             self.draw_card(c, x, y, card_data)
@@ -258,7 +273,8 @@ def main():
     generator = PDFCardGenerator(
         input_folder=r"C:\Vasa\Cartoon\Travel Game\in",      # Folder where all images are stored
         output_folder=r"C:\Vasa\Cartoon\Travel Game\out",     # Folder where PDF will be saved
-        output_filename="cards.pdf"
+        output_filename="cards.pdf",
+        gap=1
     )
     
     # Load from JSON file in the script's directory
