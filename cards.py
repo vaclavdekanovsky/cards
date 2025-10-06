@@ -1,0 +1,271 @@
+from reportlab.lib.pagesizes import A4, landscape
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import cm, mm
+from reportlab.lib.utils import ImageReader
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from PIL import Image, ImageDraw
+import json
+import io
+import os
+
+class PDFCardGenerator:
+    def __init__(self, input_folder="input", output_folder="output", output_filename="cards.pdf"):
+        self.input_folder = input_folder
+        self.output_folder = output_folder
+        
+        # Create folders if they don't exist
+        os.makedirs(input_folder, exist_ok=True)
+        os.makedirs(output_folder, exist_ok=True)
+        
+        self.output_filename = os.path.join(output_folder, output_filename)
+        
+        # Register Gagalin font (if available)
+        try:
+            # Try to register Gagalin font from input folder (TTF or OTF)
+            gagalin_ttf = os.path.join(input_folder, "Gagalin Regular.ttf")
+            gagalin_otf = os.path.join(input_folder, "Gagalin-Regular.otf")
+            
+            if os.path.exists(gagalin_ttf):
+                pdfmetrics.registerFont(TTFont('Gagalin', gagalin_ttf))
+                self.font_name = 'Gagalin'
+                print("Using Gagalin font (TTF)")
+            elif os.path.exists(gagalin_otf):
+                pdfmetrics.registerFont(TTFont('Gagalin', gagalin_otf))
+                self.font_name = 'Gagalin'
+                print("Using Gagalin font (OTF)")
+            else:
+                print("Gagalin font not found. Please download Gagalin-Regular.ttf or .otf to input folder.")
+                print("Using Helvetica-Bold as fallback")
+                self.font_name = 'Helvetica-Bold'
+        except Exception as e:
+            print(f"Error loading font: {e}")
+            self.font_name = 'Helvetica-Bold'
+        
+        # A4 landscape dimensions
+        self.page_width, self.page_height = landscape(A4)
+        
+        # Card specifications
+        self.card_width = 9.57 * cm
+        self.card_height = 6.67 * cm
+        self.border_width = 2
+        self.corner_radius = 10 * mm
+        
+        # Image area (3:2 ratio)
+        self.img_width = 8.25 * cm
+        self.img_height = 5.5 * cm
+        
+        # Grid layout
+        self.cards_per_row = 3
+        self.cards_per_col = 3
+        self.cards_per_page = 9
+    
+    def get_image_path(self, filename):
+        """Get full path for image from input folder"""
+        if os.path.isabs(filename):
+            return filename
+        return os.path.join(self.input_folder, filename)
+    
+    def create_rounded_corner_image(self, img_path):
+        """Create image with rounded top-left corner - IMPROVED QUALITY VERSION"""
+        full_path = self.get_image_path(img_path)
+        img = Image.open(full_path)
+        
+        # Convert to RGB if necessary (handles RGBA, P mode, etc.)
+        if img.mode not in ('RGB', 'RGBA'):
+            img = img.convert('RGB')
+        
+        # Calculate target dimensions in pixels at higher DPI for better quality
+        # Use 300 DPI instead of 72 DPI for much better quality
+        dpi_multiplier = 300 / 72  # ~4.17x resolution
+        target_width = int(self.img_width * dpi_multiplier)
+        target_height = int(self.img_height * dpi_multiplier)
+        
+        # Resize with high-quality resampling
+        # LANCZOS is best for downscaling
+        img = img.resize((target_width, target_height), Image.LANCZOS)
+        
+        # Convert to RGBA for transparency
+        if img.mode != 'RGBA':
+            img = img.convert('RGBA')
+        
+        # Create mask for rounded corner at higher resolution
+        mask = Image.new('L', img.size, 255)
+        draw = ImageDraw.Draw(mask)
+        
+        # Draw rounded rectangle (only top-left corner rounded)
+        # Scale corner radius to match higher resolution
+        radius = int(self.corner_radius * dpi_multiplier)
+        
+        # Black out top-left corner
+        draw.rectangle([0, 0, radius, radius], fill=0)
+        # Draw white circle for rounded effect
+        draw.ellipse([0, 0, radius * 2, radius * 2], fill=255)
+        
+        # Apply mask
+        img.putalpha(mask)
+        
+        return img
+    
+    def draw_card_border(self, c, x, y):
+        """Draw card border with rounded corners"""
+        c.setStrokeColorRGB(0, 0, 0)
+        c.setLineWidth(self.border_width)
+        c.roundRect(x, y, self.card_width, self.card_height, 
+                    self.corner_radius, stroke=1, fill=0)
+    
+    def draw_image_border(self, c, x, y):
+        """Draw border for image area - extends to bottom of card"""
+        c.setStrokeColorRGB(0, 0, 0)
+        c.setLineWidth(self.border_width)
+        
+        # Draw right border - extends from top of image to bottom of card
+        c.line(x + self.img_width, y - (self.card_height - self.img_height), 
+               x + self.img_width, y + self.img_height)
+        # Draw bottom border - extends full width to edge
+        c.line(x, y, x + self.img_width, y)
+    
+    def draw_card(self, c, x, y, card_data):
+        """Draw a single card at position (x, y)"""
+        # Draw main image with rounded corner FIRST
+        if 'image' in card_data:
+            try:
+                img = self.create_rounded_corner_image(card_data['image'])
+                img_buffer = io.BytesIO()
+                
+                # Save as PNG with NO compression for maximum quality
+                img.save(img_buffer, format='PNG', compress_level=0)
+                img_buffer.seek(0)
+                img_reader = ImageReader(img_buffer)
+                
+                # Draw at the physical size - reportlab will handle the high-res image
+                c.drawImage(img_reader, x, y + self.card_height - self.img_height, 
+                          width=self.img_width, height=self.img_height, 
+                          mask='auto', preserveAspectRatio=True)
+            except Exception as e:
+                print(f"Error loading image {card_data['image']}: {e}")
+        
+        # Draw city name with DYNAMIC left margin based on text length
+        city_text = card_data.get('city', 'City')
+        city_font_size = 16
+        c.setFont(self.font_name, city_font_size)
+        
+        # Calculate text width
+        city_text_width = c.stringWidth(city_text, self.font_name, city_font_size)
+        
+        # Calculate available width for text (leave space for flag on right)
+        available_width = self.card_width - 2 * cm  # Reserve 2cm on right for flag
+        
+        # Adjust left margin based on text length
+        if city_text_width > available_width:
+            # Text is too long - move it further left
+            text_x = x + 0.3 * cm  # Minimal left margin for long text
+        elif city_text_width > available_width * 0.8:
+            # Text is getting long - reduce margin
+            text_x = x + 0.6 * cm
+        else:
+            # Normal text length - standard margin
+            text_x = x + 1.2 * cm
+        
+        text_y = y + 0.55 * cm  # Bottom margin
+        c.drawString(text_x, text_y, city_text)
+        
+        # Draw country name - smaller font, same x position as city
+        c.setFont(self.font_name, 10)
+        country_text = card_data.get('country', 'Country')
+        c.drawString(text_x + 0.2 * cm, text_y - 0.4 * cm, country_text)
+        
+        # Draw flag - positioned after the city text
+        if 'flag' in card_data:
+            try:
+                flag_size = 1 * cm
+                # Position flag after city text with some spacing
+                flag_x = text_x + city_text_width + 0.55 * cm
+                flag_y = text_y - 0.3 * cm
+                flag_path = self.get_image_path(card_data['flag'])
+                c.drawImage(flag_path, flag_x, flag_y, 
+                          width=flag_size, height=flag_size * 0.67, preserveAspectRatio=True)
+            except Exception as e:
+                print(f"Error loading flag {card_data['flag']}: {e}")
+        
+        # Draw continent outline (top right)
+        if 'continent' in card_data:
+            try:
+                continent_size = 1.3 * cm
+                continent_x = x + self.card_width - continent_size - 0.1 * cm
+                continent_y = y + self.card_height - continent_size - 0.2 * cm
+                continent_path = self.get_image_path(card_data['continent'])
+                c.drawImage(continent_path, continent_x, continent_y,
+                          width=continent_size, height=continent_size, preserveAspectRatio=True)
+            except Exception as e:
+                print(f"Error loading continent {card_data['continent']}: {e}")
+        
+        # Draw transport icons (right side, middle)
+        if 'transport' in card_data:
+            try:
+                icon_size = 0.5 * cm
+                icon_x = x + self.card_width - icon_size - 0.2 * cm
+                icon_start_y = y + self.card_height / 2 - icon_size
+                
+                transport_count = card_data.get('transport_count', 2)
+                transport_path = self.get_image_path(card_data['transport'])
+                for i in range(transport_count):
+                    icon_y = icon_start_y - (i * (icon_size + 0.1 * cm))
+                    c.drawImage(transport_path, icon_x, icon_y,
+                              width=icon_size, height=icon_size, preserveAspectRatio=True)
+            except Exception as e:
+                print(f"Error loading transport icon {card_data['transport']}: {e}")
+        
+        # Draw borders LAST so they appear on top
+        self.draw_card_border(c, x, y)
+        self.draw_image_border(c, x, y + self.card_height - self.img_height)
+    
+    def generate_pdf(self, cards_data):
+        """Generate PDF from cards data"""
+        c = canvas.Canvas(self.output_filename, pagesize=landscape(A4))
+        
+        # Calculate margins to center the grid
+        total_width = self.cards_per_row * self.card_width
+        total_height = self.cards_per_col * self.card_height
+        margin_x = (self.page_width - total_width) / 2
+        margin_y = (self.page_height - total_height) / 2
+        
+        card_count = 0
+        for card_data in cards_data:
+            # Calculate position in grid
+            page_card_idx = card_count % self.cards_per_page
+            row = page_card_idx // self.cards_per_row
+            col = page_card_idx % self.cards_per_row
+            
+            # Calculate card position (from bottom-left)
+            x = margin_x + col * self.card_width
+            y = margin_y + (self.cards_per_col - 1 - row) * self.card_height
+            
+            # Draw the card
+            self.draw_card(c, x, y, card_data)
+            
+            card_count += 1
+            
+            # Start new page after 9 cards
+            if card_count % self.cards_per_page == 0 and card_count < len(cards_data):
+                c.showPage()
+        
+        c.save()
+        print(f"PDF generated: {self.output_filename}")
+
+def main():
+    # Create generator with custom folders
+    generator = PDFCardGenerator(
+        input_folder=r"C:\Vasa\Cartoon\Travel Game\in",      # Folder where all images are stored
+        output_folder=r"C:\Vasa\Cartoon\Travel Game\out",     # Folder where PDF will be saved
+        output_filename="cards.pdf"
+    )
+    
+    # Load from JSON file in the script's directory
+    json_path = os.path.join(os.path.dirname(__file__), "cards.json")
+    with open(json_path, 'r') as f:
+        cards_data = json.load(f)
+    generator.generate_pdf(cards_data)
+
+if __name__ == "__main__":
+    main()
