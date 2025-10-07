@@ -1,4 +1,3 @@
-
 [
     {
         "image": "mexico_city.png",
@@ -6,8 +5,9 @@
         "country": "Mexico",
         "flag": "mx.png",
         "continent": "america_outline.png",
-        "transport": "mx.png",
-        "transport_count": 3
+        "transport": ["bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
     },
     {
         "image": "skogafoss.png",
@@ -15,8 +15,9 @@
         "country": "Iceland",
         "flag": "is.png",
         "continent": "europe_outline.png",
-        "transport": "is.png",
-        "transport_count": 2
+        "transport": ["bus", "boat"],
+        "corner_number": "1",
+        "corner_font_size": 24
     },
     {
         "image": "sheikh_zayed_mosque.png",
@@ -24,8 +25,19 @@
         "country": "United Arab Emirates",
         "flag": "ae.png",
         "continent": "asia_outline.png",
-        "transport": "ae.png",
-        "transport_count": 2
+        "transport": ["bus", "train", "boat"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "bali_pura_ulun_danu_bratan.png",
+        "city": "Pura Ulun Danu Bratan",
+        "country": "Indonesia",
+        "flag": "id.png",
+        "continent": "asia_outline.png",
+        "transport": ["train", "boat"],
+        "corner_number": "1",
+        "corner_font_size": 24
     },
     {
         "image": "sheikh_zayed_mosque.png",
@@ -33,8 +45,9 @@
         "country": "United Arab Emirates",
         "flag": "ae.png",
         "continent": "asia_outline.png",
-        "transport": "ae.png",
-        "transport_count": 2
+        "transport": ["bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
     },
     {
         "image": "sheikh_zayed_mosque.png",
@@ -42,8 +55,9 @@
         "country": "United Arab Emirates",
         "flag": "ae.png",
         "continent": "asia_outline.png",
-        "transport": "ae.png",
-        "transport_count": 2
+        "transport": ["bus", "train"],
+        "corner_number": "1",
+        "corner_font_size": 24
     },
     {
         "image": "sheikh_zayed_mosque.png",
@@ -51,8 +65,9 @@
         "country": "United Arab Emirates",
         "flag": "ae.png",
         "continent": "asia_outline.png",
-        "transport": "ae.png",
-        "transport_count": 2
+        "transport": ["boat"],
+        "corner_number": "1",
+        "corner_font_size": 24
     },
     {
         "image": "sheikh_zayed_mosque.png",
@@ -60,8 +75,9 @@
         "country": "United Arab Emirates",
         "flag": "ae.png",
         "continent": "asia_outline.png",
-        "transport": "ae.png",
-        "transport_count": 2
+        "transport": ["bus", "train", "boat"],
+        "corner_number": "1",
+        "corner_font_size": 24
     },
     {
         "image": "sheikh_zayed_mosque.png",
@@ -69,8 +85,9 @@
         "country": "United Arab Emirates",
         "flag": "ae.png",
         "continent": "asia_outline.png",
-        "transport": "ae.png",
-        "transport_count": 2
+        "transport": ["bus", "train"],
+        "corner_number": "1",
+        "corner_font_size": 24
     },
     {
         "image": "sheikh_zayed_mosque.png",
@@ -78,16 +95,8 @@
         "country": "United Arab Emirates",
         "flag": "ae.png",
         "continent": "asia_outline.png",
-        "transport": "ae.png",
-        "transport_count": 2
-    },
-    {
-        "image": "sheikh_zayed_mosque.png",
-        "city": "Sheikh Zayed Mosque",
-        "country": "United Arab Emirates",
-        "flag": "ae.png",
-        "continent": "asia_outline.png",
-        "transport": "ae.png",
-        "transport_count": 2
+        "transport": ["bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
     }
 ]

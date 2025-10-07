@@ -5,6 +5,8 @@ from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from PIL import Image, ImageDraw
+from pdf2image import convert_from_bytes
+import tempfile
 import json
 import io
 import os
@@ -20,6 +22,8 @@ class PDFCardGenerator:
         os.makedirs(output_folder, exist_ok=True)
         
         self.output_filename = os.path.join(output_folder, output_filename)
+        self.cards_output_dir = os.path.join(self.output_folder, "cards")
+        os.makedirs(self.cards_output_dir, exist_ok=True)
         
         # Register Gagalin font (if available)
         try:
@@ -61,15 +65,15 @@ class PDFCardGenerator:
         self.cards_per_col = 3
         self.cards_per_page = 9
     
-    def get_image_path(self, filename):
+    def get_image_path(self, filename, image_type):
         """Get full path for image from input folder"""
         if os.path.isabs(filename):
             return filename
-        return os.path.join(self.input_folder, filename)
+        return os.path.join(self.input_folder, image_type, filename)
     
-    def create_rounded_corner_image(self, img_path):
+    def create_rounded_corner_image(self, img_path, image_type):
         """Create image with rounded top-left corner - IMPROVED QUALITY VERSION"""
-        full_path = self.get_image_path(img_path)
+        full_path = self.get_image_path(img_path, image_type)
         img = Image.open(full_path)
         
         # Convert to RGB if necessary (handles RGBA, P mode, etc.)
@@ -124,14 +128,14 @@ class PDFCardGenerator:
         c.line(x + self.img_width, y - (self.card_height - self.img_height), 
                x + self.img_width, y + self.img_height)
         # Draw bottom border - extends full width to edge
-        c.line(x, y, x + self.img_width, y)
+        c.line(x, y, x + self.card_width, y)
     
     def draw_card(self, c, x, y, card_data):
         """Draw a single card at position (x, y)"""
         # Draw main image with rounded corner FIRST
         if 'image' in card_data:
             try:
-                img = self.create_rounded_corner_image(card_data['image'])
+                img = self.create_rounded_corner_image(card_data['image'], 'landscapes')
                 img_buffer = io.BytesIO()
                 
                 # Save as PNG with NO compression for maximum quality
@@ -160,8 +164,8 @@ class PDFCardGenerator:
         # Adjust left margin based on text length
         if city_text_width > available_width:
             # Text is too long - move it further left
-            text_x = x + 0.3 * cm  # Minimal left margin for long text
-        elif city_text_width > available_width * 0.8:
+            text_x = x + 0.1 * cm  # Minimal left margin for long text
+        elif city_text_width > available_width * 0.7:
             # Text is getting long - reduce margin
             text_x = x + 0.6 * cm
         else:
@@ -174,16 +178,23 @@ class PDFCardGenerator:
         # Draw country name - smaller font, same x position as city
         c.setFont(self.font_name, 10)
         country_text = card_data.get('country', 'Country')
-        c.drawString(text_x + 0.2 * cm, text_y - 0.4 * cm, country_text)
+        c.drawString(x + 1.4 * cm, text_y - 0.4 * cm, country_text)
         
         # Draw flag - positioned after the city text
         if 'flag' in card_data:
             try:
                 flag_size = 1 * cm
+                
+                # Adjust gap based on text length
+                if city_text_width > available_width or city_text_width > available_width * 0.7:
+                    flag_gap = 0.2 * cm
+                else:
+                    flag_gap = 0.55 * cm
+
                 # Position flag after city text with some spacing
-                flag_x = text_x + city_text_width + 0.55 * cm
+                flag_x = text_x + city_text_width + flag_gap
                 flag_y = text_y - 0.3 * cm
-                flag_path = self.get_image_path(card_data['flag'])
+                flag_path = self.get_image_path(card_data['flag'], 'flags')
                 c.drawImage(flag_path, flag_x, flag_y, 
                           width=flag_size, height=flag_size * 0.67, preserveAspectRatio=True)
             except Exception as e:
@@ -195,17 +206,18 @@ class PDFCardGenerator:
                 continent_size = 1.3 * cm
                 continent_x = x + self.card_width - continent_size - 0.1 * cm
                 continent_y = y + self.card_height - continent_size - 0.2 * cm
-                continent_path = self.get_image_path(card_data['continent'])
+                continent_path = self.get_image_path(card_data['continent'], 'continents')
                 c.drawImage(continent_path, continent_x, continent_y,
                           width=continent_size, height=continent_size, preserveAspectRatio=True)
             except Exception as e:
                 print(f"Error loading continent {card_data['continent']}: {e}")
         
         # Draw transport icons (right side, middle)
-        if 'transport' in card_data:
+        if 'transport' in card_data and isinstance(card_data['transport'], list):
             try:
-                icon_size = 0.8 * cm
-                transport_count = card_data.get('transport_count', 2)
+                icon_size = 1.0 * cm
+                transport_icons = card_data['transport']
+                transport_count = len(transport_icons)
                 
                 # Center horizontally in the right sidebar
                 sidebar_width = self.card_width - self.img_width
@@ -217,22 +229,50 @@ class PDFCardGenerator:
                 sidebar_y_start = y + self.card_height - self.img_height
                 icon_start_y = sidebar_y_start + (self.img_height - total_icon_height) / 2 + total_icon_height - icon_size - 0.5 * cm
 
-                transport_path = self.get_image_path(card_data['transport'])
-                for i in range(transport_count):
+                for i, icon_name in enumerate(transport_icons):
                     icon_y = icon_start_y - (i * (icon_size + icon_spacing))
+                    transport_path = self.get_image_path(f"{icon_name}.png", 'transport_icons')
                     c.saveState()
                     c.translate(icon_x + icon_size / 2, icon_y + icon_size / 2)
                     c.rotate(90)
                     c.drawImage(transport_path, -icon_size / 2, -icon_size / 2,
-                                  width=icon_size, height=icon_size, preserveAspectRatio=True)
+                                  width=icon_size, height=icon_size, preserveAspectRatio=True, mask='auto')
                     c.restoreState()
             except Exception as e:
-                print(f"Error loading transport icon {card_data['transport']}: {e}")
+                print(f"Error loading transport icon: {e}")
         
+        # Draw corner number
+        corner_number = card_data.get('corner_number', '1')
+        corner_font_size = card_data.get('corner_font_size', 16)
+        c.setFont(self.font_name, corner_font_size)
+        
+        corner_area_x = x + self.img_width + (self.card_width - self.img_width) / 2
+        corner_area_y = y + (self.card_height - self.img_height) / 2 - (corner_font_size / 4) # Adjust for better vertical centering
+        c.drawCentredString(corner_area_x, corner_area_y, str(corner_number))
+
         # Draw borders LAST so they appear on top
         self.draw_card_border(c, x, y)
         self.draw_image_border(c, x, y + self.card_height - self.img_height)
-    
+
+    def generate_pngs(self, cards_data):
+        print("Generating individual card PNGs...")
+        for card_data in cards_data:
+            with tempfile.TemporaryDirectory() as temp_dir:
+                buffer = io.BytesIO()
+                c = canvas.Canvas(buffer, pagesize=(self.card_width, self.card_height))
+                self.draw_card(c, 0, 0, card_data)
+                c.save()
+
+                images = convert_from_bytes(buffer.getvalue(), output_folder=temp_dir, fmt='png', single_file=True)
+                
+                if 'image' in card_data:
+                    image_name = os.path.splitext(card_data['image'])[0]
+                    output_path = os.path.join(self.cards_output_dir, f"{image_name}.png")
+                    
+                    if images:
+                        images[0].save(output_path, 'PNG')
+                        print(f"Saved {output_path}")
+
     def generate_pdf(self, cards_data):
         """Generate PDF from cards data"""
         c = canvas.Canvas(self.output_filename, pagesize=landscape(A4))
@@ -282,6 +322,7 @@ def main():
     with open(json_path, 'r') as f:
         cards_data = json.load(f)
     generator.generate_pdf(cards_data)
+    generator.generate_pngs(cards_data)
 
 if __name__ == "__main__":
     main()
