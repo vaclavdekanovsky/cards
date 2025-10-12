@@ -1,0 +1,15 @@
+name: geo-outlines
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10,<3.13
+  - geopandas
+  - shapely
+  - fiona
+  - pyproj
+  - matplotlib
+  - numpy
+  - pandas
+  - gdal
+  - pip
+  - mkl-service

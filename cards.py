@@ -150,55 +150,75 @@ class PDFCardGenerator:
             except Exception as e:
                 print(f"Error loading image {card_data['image']}: {e}")
         
-        # Draw city name with DYNAMIC left margin based on text length
+        # --- Text and Flag Section ---
+
+        # Define layout parameters
+        flag_size = 1 * cm
+        gap = 0.2 * cm
+        
+        # Get city text and font size
         city_text = card_data.get('city', 'City')
         city_font_size = 16
         c.setFont(self.font_name, city_font_size)
         
-        # Calculate text width
+        # Calculate initial text width
         city_text_width = c.stringWidth(city_text, self.font_name, city_font_size)
+
+        # --- Dynamic Positioning and Font Sizing ---
+
+        # Define available width under the image
+        text_area_width = self.img_width
         
-        # Calculate available width for text (leave space for flag on right)
-        available_width = self.card_width - 2 * cm  # Reserve 2cm on right for flag
-        
-        # Adjust left margin based on text length
-        if city_text_width > available_width:
-            # Text is too long - move it further left
-            text_x = x + 0.1 * cm  # Minimal left margin for long text
-        elif city_text_width > available_width * 0.7:
-            # Text is getting long - reduce margin
-            text_x = x + 0.6 * cm
+        # Check if the text is "long" (e.g., > 70% of the available area width)
+        is_long_text = (flag_size + gap + city_text_width) > (text_area_width * 0.7)
+
+        if is_long_text:
+            # For long text, align to the left with a small margin
+            left_margin = 0.5 * cm # Increased from 0.2cm
+            right_margin = 0.2 * cm
         else:
-            # Normal text length - standard margin
-            text_x = x + 1.2 * cm
+            # For shorter text, center it more
+            left_margin = 1.2 * cm
+            right_margin = 0.2 * cm
+
+        # Available width for text, flag, and gap
+        available_width = text_area_width - left_margin - right_margin
         
-        text_y = y + 0.55 * cm  # Bottom margin
-        c.drawString(text_x, text_y, city_text)
+        # Total content width
+        total_content_width = flag_size + gap + city_text_width
         
-        # Draw country name - smaller font, same x position as city
-        c.setFont(self.font_name, 10)
-        country_text = card_data.get('country', 'Country')
-        c.drawString(x + 1.4 * cm, text_y - 0.4 * cm, country_text)
-        
-        # Draw flag - positioned after the city text
+        # Reduce font size until it fits
+        while total_content_width > available_width and city_font_size > 8:
+            city_font_size -= 1
+            c.setFont(self.font_name, city_font_size)
+            city_text_width = c.stringWidth(city_text, self.font_name, city_font_size)
+            total_content_width = flag_size + gap + city_text_width
+
+        # Set final positions
+        flag_x = x + left_margin
+        text_x = flag_x + flag_size + gap
+
+        # --- Drawing ---
+
+        # Draw flag on the left
         if 'flag' in card_data:
             try:
-                flag_size = 1 * cm
-                
-                # Adjust gap based on text length
-                if city_text_width > available_width or city_text_width > available_width * 0.7:
-                    flag_gap = 0.2 * cm
-                else:
-                    flag_gap = 0.55 * cm
-
-                # Position flag after city text with some spacing
-                flag_x = text_x + city_text_width + flag_gap
-                flag_y = text_y - 0.3 * cm
+                flag_y = y + 0.25 * cm
                 flag_path = self.get_image_path(card_data['flag'], 'flags')
-                c.drawImage(flag_path, flag_x, flag_y, 
+                c.drawImage(flag_path, flag_x, flag_y,
                           width=flag_size, height=flag_size * 0.67, preserveAspectRatio=True)
             except Exception as e:
                 print(f"Error loading flag {card_data['flag']}: {e}")
+
+        # Draw city name with adjusted font size
+        c.setFont(self.font_name, city_font_size)
+        text_y = y + 0.55 * cm
+        c.drawString(text_x, text_y, city_text)
+        
+        # Draw country name
+        c.setFont(self.font_name, 10)
+        country_text = card_data.get('country', 'Country')
+        c.drawString(text_x, text_y - 0.4 * cm, country_text)
         
         # Draw continent outline (top right)
         if 'continent' in card_data:
@@ -206,7 +226,8 @@ class PDFCardGenerator:
                 continent_size = 1.3 * cm
                 continent_x = x + self.card_width - continent_size - 0.1 * cm
                 continent_y = y + self.card_height - continent_size - 0.2 * cm
-                continent_path = self.get_image_path(card_data['continent'], 'continents')
+                continent_image = f"{card_data['continent']}_outline.png"
+                continent_path = self.get_image_path(continent_image, 'continents')
                 c.drawImage(continent_path, continent_x, continent_y,
                           width=continent_size, height=continent_size, preserveAspectRatio=True)
             except Exception as e:
@@ -309,10 +330,15 @@ class PDFCardGenerator:
         print(f"PDF generated: {self.output_filename}")
 
 def main():
+    # Load configuration from JSON file
+    config_path = os.path.join(os.path.dirname(__file__), "configuration.json")
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+
     # Create generator with custom folders
     generator = PDFCardGenerator(
-        input_folder=r"C:\Vasa\Cartoon\Travel Game\in",      # Folder where all images are stored
-        output_folder=r"C:\Vasa\Cartoon\Travel Game\out",     # Folder where PDF will be saved
+        input_folder=config['input_folder'],
+        output_folder=config['output_folder'],
         output_filename="cards.pdf",
         gap=1
     )

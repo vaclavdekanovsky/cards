@@ -9,21 +9,15 @@ class ContinentDownloader:
     """
     Downloads SVG outlines for continents and renders them to PNGs with a white background.
 
-    Sources use the mapsicon project (https://github.com/djaiss/mapsicon) which provides
-    continent silhouettes: americas, europe, asia, africa, oceania.
+    Sources use Wikimedia Commons for SVG maps.
     """
 
     CONTINENT_SOURCES = {
-        # Whole Americas (North + South)
-        "americas": "https://raw.githubusercontent.com/djaiss/mapsicon/main/continent/americas.svg",
-        # Europe
-        "europe": "https://raw.githubusercontent.com/djaiss/mapsicon/main/continent/europe.svg",
-        # Asia
-        "asia": "https://raw.githubusercontent.com/djaiss/mapsicon/main/continent/asia.svg",
-        # Africa
-        "africa": "https://raw.githubusercontent.com/djaiss/mapsicon/main/continent/africa.svg",
-        # Australia and Oceania combined region
-        "oceania": "https://raw.githubusercontent.com/djaiss/mapsicon/main/continent/oceania.svg",
+        "americas": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Americas_(orthographic_projection).svg",
+        "europe": "https://upload.wikimedia.org/wikipedia/commons/4/44/Europe_(orthographic_projection).svg",
+        "asia": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Asia_(orthographic_projection).svg",
+        "africa": "https://upload.wikimedia.org/wikipedia/commons/8/86/Africa_(orthographic_projection).svg",
+        "oceania": "https://upload.wikimedia.org/wikipedia/commons/8/88/Australia-New_Guinea_(orthographic_projection).svg",
     }
 
     def __init__(self, targets=None, output_dir="output"):
