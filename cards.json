@@ -51,6 +51,23 @@
         "corner_font_size": 24
     },
     {
+        "image": "great_zimbabwe.png",
+        "city": "Great Zimbabwe",
+        "country": [
+            "Zimbabwe"
+        ],
+        "flag": [
+            "zw.png"
+        ],
+        "continent": "africa",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
         "image": "victoria_falls.png",
         "city": "Victoria Falls",
         "country": [
@@ -65,23 +82,6 @@
         "transport": [
             "bus",
             "boat"
-        ],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "great_zimbabwe.png",
-        "city": "Great Zimbabwe",
-        "country": [
-            "Zimbabwe"
-        ],
-        "flag": [
-            "zw.png"
-        ],
-        "continent": "africa",
-        "transport": [
-            "bus",
-            "bus"
         ],
         "corner_number": "1",
         "corner_font_size": 24
@@ -150,23 +150,6 @@
         "transport": [
             "bus",
             "bus"
-        ],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "panama_channel.png",
-        "city": "Panama Channel",
-        "country": [
-            "Panama"
-        ],
-        "flag": [
-            "pa.png"
-        ],
-        "continent": "america",
-        "transport": [
-            "train",
-            "boat"
         ],
         "corner_number": "1",
         "corner_font_size": 24
@@ -252,6 +235,23 @@
         "transport": [
             "bus",
             "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "panama_channel.png",
+        "city": "Panama Channel",
+        "country": [
+            "Panama"
+        ],
+        "flag": [
+            "pa.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "train",
+            "boat"
         ],
         "corner_number": "1",
         "corner_font_size": 24
