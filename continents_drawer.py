@@ -3,14 +3,12 @@ import matplotlib.pyplot as plt
 import os
 from shapely.geometry import Polygon
 
-# --- Configuration ---
-# Define input and output directories
-INPUT_DIR = r"C:\Vasa\Cartoon\Travel Game\in\continent_maps"
-OUTPUT_DIR = r"C:\Vasa\Cartoon\Travel Game\out\continent_images"
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+import json
 
-# The shapefile for continents, located in the input directory
-SHAPEFILE = os.path.join(INPUT_DIR, "World_Continents.shp")
+# based on files from https://hub.arcgis.com/datasets/esri::world-continents/explore
+
+# --- Global Configuration ---
+# The configuration will be loaded in the main execution block.
 
 # Column in the shapefile that identifies the continents
 CONTINENT_NAME_COLUMN = "CONTINENT"
@@ -26,7 +24,7 @@ CONTINENT_COLORS = {
 
 # --- Main Script ---
 
-def draw_continent(output_name, color, all_continents_data):
+def draw_continent(output_name, color, all_continents_data, output_dir):
     """
     Draws a silhouette of a continent group using the provided data and saves it as a PNG.
     """
@@ -109,7 +107,7 @@ def draw_continent(output_name, color, all_continents_data):
 
     # Save the figure
     filename = f"{output_name.lower()}.png"
-    output_path = os.path.join(OUTPUT_DIR, filename)
+    output_path = os.path.join(output_dir, filename)
     plt.savefig(output_path, dpi=300, bbox_inches='tight', pad_inches=0, transparent=True)
     print(f"Saved {output_path}")
     
@@ -117,6 +115,27 @@ def draw_continent(output_name, color, all_continents_data):
 
 
 if __name__ == "__main__":
+    # Load configuration from JSON file
+    try:
+        with open("configuration.json", 'r') as f:
+            config = json.load(f)
+        base_input_dir = config['input_folder']
+        base_output_dir = config['output_folder']
+    except FileNotFoundError:
+        print("Error: configuration.json not found. Please ensure the file exists.")
+        exit()
+    except KeyError:
+        print("Error: configuration.json is missing 'input_folder' or 'output_folder'.")
+        exit()
+
+    # Define specific input and output directories based on the config
+    INPUT_DIR = os.path.join(base_input_dir, "continent_maps")
+    OUTPUT_DIR = os.path.join(base_output_dir, "continent_images")
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    # The shapefile for continents, located in the input directory
+    SHAPEFILE = os.path.join(INPUT_DIR, "World_Continents.shp")
+
     # Check if the shapefile exists
     if not os.path.exists(SHAPEFILE):
         print(f"Error: Shapefile not found at '{SHAPEFILE}'")
@@ -132,7 +151,7 @@ if __name__ == "__main__":
 
     # --- Generate Continent Images ---
     for name, color in CONTINENT_COLORS.items():
-        draw_continent(name, color, world_continents)
+        draw_continent(name, color, world_continents, OUTPUT_DIR)
 
     print("\nContinent drawing complete.")
     print(f"Images saved in '{OUTPUT_DIR}' directory.")

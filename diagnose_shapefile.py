@@ -1,6 +1,7 @@
 import geopandas as gpd
 import pandas as pd
 import os
+import json
 
 # To prevent long rows from being truncated in the output
 pd.set_option('display.max_rows', 500)
@@ -8,15 +9,20 @@ pd.set_option('display.max_columns', 500)
 pd.set_option('display.width', 1000)
 
 try:
-    # Define the directory and filename
-    input_dir = r"C:\Vasa\Cartoon\Travel Game\in\continent_maps"
+    # Load configuration from JSON file
+    with open("configuration.json", 'r') as f:
+        config = json.load(f)
+    base_input_dir = config['input_folder']
+
+    # Define the directory and filename based on the config
+    input_dir = os.path.join(base_input_dir, "continent_maps")
     shapefile_name = "World_Continents.shp"
     shapefile_path = os.path.join(input_dir, shapefile_name)
 
     print(f"--- Reading Shapefile: {shapefile_path} ---")
     data = gpd.read_file(shapefile_path)
 
-    print("--- Shapefile Details ---")
+    print("\n--- Shapefile Details ---")
 
     # 1. Print CRS
     print("\n[Coordinate Reference System (CRS)]")
