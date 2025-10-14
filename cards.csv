@@ -1,15 +1,35 @@
 image,city,country,flag,continent,transport,corner_number,corner_font_size
-mexico_city.png,Mexico City,Mexico,mx.png,america,"bus;bus",1,24
-skogafoss.png,Skogafoss,Iceland,is.png,europe,"bus;boat",1,24
-sheikh_zayed_mosque.png,Sheikh Zayed Mosque,United Arab Emirates,ae.png,asia,"bus;train;boat",1,24
-bali_pura_ulun_danu_bratan.png,Pura Ulun Danu Bratan,Indonesia,id.png,asia,"bus;boat",1,24
-cervena_lhota.png,Cervena Lhota,Czechia,cz.png,asia,"train;bus",1,24
-fjadrargljufur.png,Fjadrargljufur,Iceland,is.png,europe,"bus;bus",1,24
-wat_rong_khun.png,Wat Rong Khun,Thailand,th.png,asia,"boat;bus",1,24
-salar_de_uyuni.png,Salar de Uyuni,Bolivia,bo.png,america,"bus;bus",1,24
-florence.png,Florence,Italy,it.png,europe,"bus;train",1,24
-easter_island.png,Easter Island,Chile,cl.png,america,"boat;boat",1,24
-machu_picchu.png,Machu Picchu,Peru,pe.png,america,"bus;train",1,24
-sydney.png,Sydney Opera,Australia,au.png,australia,"bus;boat",1,24
-holland.png,Tulip Field,Netherlands,nl.png,europe,"bus;bus",1,24
-lofoten.png,Lofoten,Norway,no.png,europe,"bus;boat",1,24
+mexico_city.png,Mexico City,Mexico,mx.png,america,bus;bus,1,24
+skogafoss.png,Skogafoss,Iceland,is.png,europe,bus;boat,1,24
+sheikh_zayed_mosque.png,Sheikh Zayed Mosque,United Arab Emirates,ae.png,asia,bus;train;boat,1,24
+bali_pura_ulun_danu_bratan.png,Pura Ulun Danu Bratan,Indonesia,id.png,asia,bus;boat,1,24
+cervena_lhota.png,Cervena Lhota,Czechia,cz.png,europe,train;bus,1,24
+fjadrargljufur.png,Fjadrargljufur,Iceland,is.png,europe,bus;bus,1,24
+wat_rong_khun.png,Wat Rong Khun,Thailand,th.png,asia,bus;boat,1,24
+salar_de_uyuni.png,Salar de Uyuni,Bolivia,bo.png,america,bus;bus,1,24
+florence.png,Florence,Italy,it.png,europe,bus;train,1,24
+easter_island.png,Easter Island,Chile,cl.png,america,boat;boat,1,24
+machu_picchu.png,Machu Picchu,Peru,pe.png,america,bus;train,1,24
+sydney.png,Sydney Opera,Australia,au.png,africa,bus;boat,1,24
+holland.png,Tulip Field,Netherlands,nl.png,europe,bus;bus,1,24
+lofoten.png,Lofoten,Norway,no.png,europe,bus;boat,1,24
+samarkand.png,Samarkand,Uzbekistan,uz.png,asia,bus;train,1,24
+washington.png,Washington,Unites States of America,us.png,america,bus;bus,1,24
+antigua_guatemala.png,Antigua Guatemala,Guatemala,gt.png,america,bus;bus,1,24
+timbuktu.png,Timbuktu,Mali,ml.png,africa,bus;bus,1,24
+osaka_castle.png,Osaka Castle,Japan,jp.png,asia,bus;train,1,24
+milforn_sound.png,Milford Sound,New Zealand,nz.png,africa,bus;boat,1,24
+nine_arch_bridge.png,Nine Arch Bridge,Sri Lanka,lk.png,asia,bus;train,1,24
+azadi_tehran.png,Azadi Tower Tehran,Iran,ir.png,asia,bus;bus,1,24
+hassan_ii_mosque.png,"Hassan II Mosque, Casablanca",Marocco,ma.png,africa,bus;bus,1,24
+abu_simbel.png,Abu Simbel,Egypt,eg.png,africa,bus;bus,1,24
+sanaa.png,Sanaa,Yemen,ye.png,asia,bus;bus,1,24
+lhasa.png,"Lhasa, Tibet",China,cn.png,asia,bus;train,1,24
+matterhorn.png,Matterhorn,Switzerland,ch.png,europe,bus;train,1,24
+burj_khalifa.png,"Burj Khalifa, Dubai",United Arab Emirates,ae.png,asia,bus;boat,1,24
+bagan.png,Bagan,Myanmar,my.png,asia,bus;bus,1,24
+barrier_reef.png,Great Barrier Reef,Australia,au.png,africa,boat;boat,1,24
+tikal.png,Tikal,Guatemala,gt.png,america,bus;bus,1,24
+stonehenge.png,Stonehenge,United Kindgom,uk.png,europe,bus;bus,1,24
+victoria_falls.png,Victoria Falls,Zambia and Zimbabwe,za.png,africa,bus;bus,1,24
+neuschwanstein.png,Neuschwanstein Castle,Germany,de.png,europe,bus;bus,1,24

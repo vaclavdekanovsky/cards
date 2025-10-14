@@ -1,0 +1,19 @@
+[
+    {
+        "image": "socotra.png",
+        "city": "Socotra Island",
+        "country": "Yemen",
+        "flag": "ye.png",
+        "continent": "asia",
+        "transport": ["bus","boat"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    } 
+    
+    
+    
+    
+    
+    
+
+]

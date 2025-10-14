@@ -223,13 +223,26 @@ class PDFCardGenerator:
         # Draw continent outline (top right)
         if 'continent' in card_data:
             try:
-                continent_size = 1.3 * cm
-                continent_x = x + self.card_width - continent_size - 0.1 * cm
+                # Set custom sizes for specific continents for better visual balance
+                if card_data['continent'] == 'asia':
+                    continent_size = 0.9 * cm
+                elif card_data['continent'] == 'africa':
+                    continent_size = 1.1 * cm
+                else:
+                    continent_size = 1.3 * cm
+
+                # Define a default right margin
+                right_margin = 0.1 * cm
+                # For Asia, adjust its position
+                if card_data['continent'] == 'asia':
+                    right_margin = 0.2 * cm
+
+                continent_x = x + self.card_width - continent_size - right_margin
                 continent_y = y + self.card_height - continent_size - 0.2 * cm
                 continent_image = f"{card_data['continent']}_outline.png"
                 continent_path = self.get_image_path(continent_image, 'continents')
                 c.drawImage(continent_path, continent_x, continent_y,
-                          width=continent_size, height=continent_size, preserveAspectRatio=True)
+                          width=continent_size, height=continent_size, preserveAspectRatio=True, mask='auto')
             except Exception as e:
                 print(f"Error loading continent {card_data['continent']}: {e}")
         

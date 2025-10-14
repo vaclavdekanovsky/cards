@@ -44,7 +44,7 @@
         "city": "Cervena Lhota",
         "country": "Czechia",
         "flag": "cz.png",
-        "continent": "asia",
+        "continent": "europe",
         "transport": ["train","bus"],
         "corner_number": "1",
         "corner_font_size": 24
@@ -65,7 +65,7 @@
         "country": "Thailand",
         "flag": "th.png",
         "continent": "asia",
-        "transport": ["boat","bus"],
+        "transport": ["bus","boat"],
         "corner_number": "1",
         "corner_font_size": 24
     },
@@ -114,7 +114,7 @@
         "city": "Sydney Opera",
         "country": "Australia",
         "flag": "au.png",
-        "continent": "australia",
+        "continent": "africa",
         "transport": ["bus","boat"],
         "corner_number": "1",
         "corner_font_size": 24
@@ -178,7 +178,171 @@
         "transport": ["bus","bus"],
         "corner_number": "1",
         "corner_font_size": 24
+    },
+    {
+        "image": "osaka_castle.png",
+        "city": "Osaka Castle",
+        "country": "Japan",
+        "flag": "jp.png",
+        "continent": "asia",
+        "transport": ["bus","train"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "milforn_sound.png",
+        "city": "Milford Sound",
+        "country": "New Zealand",
+        "flag": "nz.png",
+        "continent": "africa",
+        "transport": ["bus","boat"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "nine_arch_bridge.png",
+        "city": "Nine Arch Bridge",
+        "country": "Sri Lanka",
+        "flag": "lk.png",
+        "continent": "asia",
+        "transport": ["bus","train"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "azadi_tehran.png",
+        "city": "Azadi Tower Tehran",
+        "country": "Iran",
+        "flag": "ir.png",
+        "continent": "asia",
+        "transport": ["bus","bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "hassan_ii_mosque.png",
+        "city": "Hassan II Mosque, Casablanca",
+        "country": "Marocco",
+        "flag": "ma.png",
+        "continent": "africa",
+        "transport": ["bus","bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "abu_simbel.png",
+        "city": "Abu Simbel",
+        "country": "Egypt",
+        "flag": "eg.png",
+        "continent": "africa",
+        "transport": ["bus","bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "sanaa.png",
+        "city": "Sanaa",
+        "country": "Yemen",
+        "flag": "ye.png",
+        "continent": "asia",
+        "transport": ["bus","bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "lhasa.png",
+        "city": "Lhasa, Tibet",
+        "country": "China",
+        "flag": "cn.png",
+        "continent": "asia",
+        "transport": ["bus","train"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "matterhorn.png",
+        "city": "Matterhorn",
+        "country": "Switzerland",
+        "flag": "ch.png",
+        "continent": "europe",
+        "transport": ["bus","train"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "burj_khalifa.png",
+        "city": "Burj Khalifa, Dubai",
+        "country": "United Arab Emirates",
+        "flag": "ae.png",
+        "continent": "asia",
+        "transport": ["bus","boat"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "bagan.png",
+        "city": "Bagan",
+        "country": "Myanmar",
+        "flag": "my.png",
+        "continent": "asia",
+        "transport": ["bus","bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "barrier_reef.png",
+        "city": "Great Barrier Reef",
+        "country": "Australia",
+        "flag": "au.png",
+        "continent": "africa",
+        "transport": ["boat","boat"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "tikal.png",
+        "city": "Tikal",
+        "country": "Guatemala",
+        "flag": "gt.png",
+        "continent": "america",
+        "transport": ["bus","bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "stonehenge.png",
+        "city": "Stonehenge",
+        "country": "United Kindgom",
+        "flag": "uk.png",
+        "continent": "europe",
+        "transport": ["bus","bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "victoria_falls.png",
+        "city": "Victoria Falls",
+        "country": "Zambia and Zimbabwe",
+        "flag": "za.png",
+        "continent": "africa",
+        "transport": ["bus","bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "neuschwanstein.png",
+        "city": "Neuschwanstein Castle",
+        "country": "Germany",
+        "flag": "de.png",
+        "continent": "europe",
+        "transport": ["bus","bus"],
+        "corner_number": "1",
+        "corner_font_size": 24
     }
+    
+    
+    
+    
     
     
 

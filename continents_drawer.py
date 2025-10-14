@@ -35,6 +35,8 @@ def draw_continent(output_name, color, all_continents_data, output_dir):
         names_in_file = ['North America', 'South America']
     elif output_name == "Oceania":
         names_in_file = ['Australia', 'Oceania']
+    elif output_name == "Africa & Oceania":
+        names_in_file = ['Africa', 'Australia', 'Oceania']
     else:
         names_in_file = [output_name]
     
@@ -73,18 +75,22 @@ def draw_continent(output_name, color, all_continents_data, output_dir):
     # Create a GeoSeries, correctly using the file's native CRS
     continent_gs = gpd.GeoSeries([continent_geom], crs=all_continents_data.crs)
 
-    # Use custom projections for continents split by the dateline/prime meridian.
+    # Use custom projections for a better appearance and to avoid splitting continents.
     if output_name == "Asia":
-        # Center on 100°E
-        custom_projection = "+proj=eqc +lat_ts=0 +lat_0=0 +lon_0=100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
+        # Custom LAEA projection centered on Asia.
+        custom_projection = "+proj=laea +lat_0=40 +lon_0=100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
         continent_projected = continent_gs.to_crs(custom_projection)
     elif output_name == "Americas":
-        # Center on 100°W
-        custom_projection = "+proj=eqc +lat_ts=0 +lat_0=0 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
+        # Custom LAEA projection centered on the Americas.
+        custom_projection = "+proj=laea +lat_0=10 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
         continent_projected = continent_gs.to_crs(custom_projection)
     elif output_name == "Oceania":
-        # Center on 150°E
-        custom_projection = "+proj=eqc +lat_ts=0 +lat_0=0 +lon_0=150 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
+        # Custom LAEA projection centered on Oceania.
+        custom_projection = "+proj=laea +lat_0=-20 +lon_0=150 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
+        continent_projected = continent_gs.to_crs(custom_projection)
+    elif output_name == "Africa & Oceania":
+        # Custom projection centered on the Indian Ocean to keep Africa and Oceania together.
+        custom_projection = "+proj=eqc +lat_ts=0 +lat_0=0 +lon_0=80 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
         continent_projected = continent_gs.to_crs(custom_projection)
     else:
         # Use the standard Robinson projection for other continents (Europe, Africa).
@@ -152,6 +158,10 @@ if __name__ == "__main__":
     # --- Generate Continent Images ---
     for name, color in CONTINENT_COLORS.items():
         draw_continent(name, color, world_continents, OUTPUT_DIR)
+
+    # --- Generate Additional Combined Image ---
+    print("\n--- Generating Combined Image ---")
+    draw_continent("Africa & Oceania", "grey", world_continents, OUTPUT_DIR)
 
     print("\nContinent drawing complete.")
     print(f"Images saved in '{OUTPUT_DIR}' directory.")
