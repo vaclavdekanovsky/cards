@@ -152,134 +152,84 @@ class PDFCardGenerator:
         
         # --- Text and Flag Section ---
 
-        # Get card data, ensuring country and flag are lists
+        # Define layout parameters
+        flag_size = 1 * cm
+        gap = 0.2 * cm
+        
+        # Get city text and font size
         city_text = card_data.get('city', 'City')
-        country_list = card_data.get('country', [])
-        if isinstance(country_list, str): country_list = [country_list]
-        flag_list = card_data.get('flag', [])
-        if isinstance(flag_list, str): flag_list = [flag_list]
-
-        num_countries = len(country_list)
-
-        # Set main font for city name
         city_font_size = 16
         c.setFont(self.font_name, city_font_size)
+        
+        # Calculate initial text width
+        city_text_width = c.stringWidth(city_text, self.font_name, city_font_size)
 
-        if num_countries == 2:
-            # --- LAYOUT FOR TWO COUNTRIES ---
-            # Use the same vertical positions as the single-country layout
-            city_y = y + 0.55 * cm
-            country_y = y + 0.15 * cm
+        # --- Dynamic Positioning and Font Sizing ---
 
-            # Position and draw flags side-by-side on the left
-            flag_size = 1 * cm
-            flag_y = y + 0.2 * cm  # Vertically center in the bottom bar
-            flag_1_x = x + 1.2 * cm
-            flag_2_x = flag_1_x + flag_size + 0.2 * cm
-            try:
-                c.drawImage(self.get_image_path(flag_list[0], 'flags'), flag_1_x, flag_y, width=flag_size, height=flag_size * 0.67, preserveAspectRatio=True, mask='auto')
-                c.drawImage(self.get_image_path(flag_list[1], 'flags'), flag_2_x, flag_y, width=flag_size, height=flag_size * 0.67, preserveAspectRatio=True, mask='auto')
-            except Exception as e:
-                print(f"Error drawing flags: {e}")
+        # Define available width under the image
+        text_area_width = self.img_width
+        
+        # Check if the text is "long" (e.g., > 70% of the available area width)
+        is_long_text = (flag_size + gap + city_text_width) > (text_area_width * 0.7)
 
-            # --- Text Logic with Font Scaling ---
-            text_x = flag_2_x + flag_size + 0.4 * cm
-            available_width = self.card_width - (text_x - x) - 0.2 * cm
-
-            # Draw City Name (scaled if needed)
-            c.setFont(self.font_name, 16)
-            city_font_size = 16
-            while c.stringWidth(city_text, self.font_name, city_font_size) > available_width and city_font_size > 8:
-                city_font_size -= 1
-                c.setFont(self.font_name, city_font_size)
-            c.drawString(text_x, city_y, city_text)
-
-            # Draw Country Names (scaled if needed)
-            c.setFont(self.font_name, 10)
-            country_font_size = 10
-            country_text = f"{country_list[0]}, {country_list[1]}"
-            while c.stringWidth(country_text, self.font_name, country_font_size) > available_width and country_font_size > 8:
-                country_font_size -= 1
-                c.setFont(self.font_name, country_font_size)
-            c.drawString(text_x, country_y, country_text)
-
+        if is_long_text:
+            # For long text, align to the left with a small margin
+            left_margin = 0.5 * cm # Increased from 0.2cm
+            right_margin = 0.2 * cm
         else:
-            # --- LAYOUT FOR SINGLE COUNTRY (Replicating cards_old.py logic) ---
-            flag_size = 1 * cm
-            gap = 0.2 * cm
-            
-            # Recalculate city text width with the correct font
+            # For shorter text, center it more
+            left_margin = 1.2 * cm
+            right_margin = 0.2 * cm
+
+        # Available width for text, flag, and gap
+        available_width = text_area_width - left_margin - right_margin
+        
+        # Total content width
+        total_content_width = flag_size + gap + city_text_width
+        
+        # Reduce font size until it fits
+        while total_content_width > available_width and city_font_size > 8:
+            city_font_size -= 1
             c.setFont(self.font_name, city_font_size)
             city_text_width = c.stringWidth(city_text, self.font_name, city_font_size)
-
-            # --- Dynamic Positioning and Font Sizing from old script ---
-            text_area_width = self.img_width
-            is_long_text = (flag_size + gap + city_text_width) > (text_area_width * 0.7)
-
-            if is_long_text:
-                left_margin = 0.5 * cm
-                right_margin = 0.2 * cm
-            else:
-                left_margin = 1.2 * cm
-                right_margin = 0.2 * cm
-
-            available_width = text_area_width - left_margin - right_margin
             total_content_width = flag_size + gap + city_text_width
-            
-            while total_content_width > available_width and city_font_size > 8:
-                city_font_size -= 1
-                c.setFont(self.font_name, city_font_size)
-                city_text_width = c.stringWidth(city_text, self.font_name, city_font_size)
-                total_content_width = flag_size + gap + city_text_width
 
-            # Set final positions
-            flag_x = x + left_margin
-            text_x = flag_x + flag_size + gap
+        # Set final positions
+        flag_x = x + left_margin
+        text_x = flag_x + flag_size + gap
 
-            # --- Drawing ---
-            # Draw flag on the left
-            if flag_list:
-                try:
-                    flag_y = y + 0.25 * cm
-                    flag_path = self.get_image_path(flag_list[0], 'flags')
-                    c.drawImage(flag_path, flag_x, flag_y,
-                              width=flag_size, height=flag_size * 0.67, preserveAspectRatio=True, mask='auto')
-                except Exception as e:
-                    print(f"Error loading flag {flag_list[0]}: {e}")
+        # --- Drawing ---
 
-            # Draw city name with adjusted font size
-            c.setFont(self.font_name, city_font_size)
-            text_y = y + 0.55 * cm
-            c.drawString(text_x, text_y, city_text)
-            
-            # Draw country name
-            if country_list:
-                c.setFont(self.font_name, 10)
-                c.drawString(text_x, text_y - 0.4 * cm, country_list[0])
+        # Draw flag on the left
+        if 'flag' in card_data:
+            try:
+                flag_y = y + 0.25 * cm
+                flag_path = self.get_image_path(card_data['flag'], 'flags')
+                c.drawImage(flag_path, flag_x, flag_y,
+                          width=flag_size, height=flag_size * 0.67, preserveAspectRatio=True)
+            except Exception as e:
+                print(f"Error loading flag {card_data['flag']}: {e}")
+
+        # Draw city name with adjusted font size
+        c.setFont(self.font_name, city_font_size)
+        text_y = y + 0.55 * cm
+        c.drawString(text_x, text_y, city_text)
+        
+        # Draw country name
+        c.setFont(self.font_name, 10)
+        country_text = card_data.get('country', 'Country')
+        c.drawString(text_x, text_y - 0.4 * cm, country_text)
         
         # Draw continent outline (top right)
         if 'continent' in card_data:
             try:
-                # Set custom sizes for specific continents for better visual balance
-                if card_data['continent'] == 'asia':
-                    continent_size = 0.9 * cm
-                elif card_data['continent'] == 'africa':
-                    continent_size = 1.1 * cm
-                else:
-                    continent_size = 1.3 * cm
-
-                # Define a default right margin
-                right_margin = 0.1 * cm
-                # For Asia, adjust its position
-                if card_data['continent'] == 'asia':
-                    right_margin = 0.2 * cm
-
-                continent_x = x + self.card_width - continent_size - right_margin
+                continent_size = 1.3 * cm
+                continent_x = x + self.card_width - continent_size - 0.1 * cm
                 continent_y = y + self.card_height - continent_size - 0.2 * cm
                 continent_image = f"{card_data['continent']}_outline.png"
                 continent_path = self.get_image_path(continent_image, 'continents')
                 c.drawImage(continent_path, continent_x, continent_y,
-                          width=continent_size, height=continent_size, preserveAspectRatio=True, mask='auto')
+                          width=continent_size, height=continent_size, preserveAspectRatio=True)
             except Exception as e:
                 print(f"Error loading continent {card_data['continent']}: {e}")
         

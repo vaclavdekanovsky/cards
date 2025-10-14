@@ -1,349 +1,634 @@
 [
     {
-        "image": "mexico_city.png",
-        "city": "Mexico City",
-        "country": "Mexico",
-        "flag": "mx.png",
-        "continent": "america",
-        "transport": ["bus","bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "skogafoss.png",
-        "city": "Skogafoss",
-        "country": "Iceland",
-        "flag": "is.png",
-        "continent": "europe",
-        "transport": ["bus", "boat"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "sheikh_zayed_mosque.png",
-        "city": "Sheikh Zayed Mosque",
-        "country": "United Arab Emirates",
-        "flag": "ae.png",
-        "continent": "asia",
-        "transport": ["bus", "train", "boat"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "bali_pura_ulun_danu_bratan.png",
-        "city": "Pura Ulun Danu Bratan",
-        "country": "Indonesia",
-        "flag": "id.png",
-        "continent": "asia",
-        "transport": ["bus", "boat"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "cervena_lhota.png",
-        "city": "Cervena Lhota",
-        "country": "Czechia",
-        "flag": "cz.png",
-        "continent": "europe",
-        "transport": ["train","bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "fjadrargljufur.png",
-        "city": "Fjadrargljufur",
-        "country": "Iceland",
-        "flag": "is.png",
-        "continent": "europe",
-        "transport": ["bus", "bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "wat_rong_khun.png",
-        "city": "Wat Rong Khun",
-        "country": "Thailand",
-        "flag": "th.png",
-        "continent": "asia",
-        "transport": ["bus","boat"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "salar_de_uyuni.png",
-        "city": "Salar de Uyuni",
-        "country": "Bolivia",
-        "flag": "bo.png",
-        "continent": "america",
-        "transport": ["bus", "bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "florence.png",
-        "city": "Florence",
-        "country": "Italy",
-        "flag": "it.png",
-        "continent": "europe",
-        "transport": ["bus", "train"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "easter_island.png",
-        "city": "Easter Island",
-        "country": "Chile",
-        "flag": "cl.png",
-        "continent": "america",
-        "transport": ["boat","boat"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "machu_picchu.png",
-        "city": "Machu Picchu",
-        "country": "Peru",
-        "flag": "pe.png",
-        "continent": "america",
-        "transport": ["bus","train"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "sydney.png",
-        "city": "Sydney Opera",
-        "country": "Australia",
-        "flag": "au.png",
-        "continent": "africa",
-        "transport": ["bus","boat"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "holland.png",
-        "city": "Tulip Field",
-        "country": "Netherlands",
-        "flag": "nl.png",
-        "continent": "europe",
-        "transport": ["bus","bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "lofoten.png",
-        "city": "Lofoten",
-        "country": "Norway",
-        "flag": "no.png",
-        "continent": "europe",
-        "transport": ["bus","boat"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "samarkand.png",
-        "city": "Samarkand",
-        "country": "Uzbekistan",
-        "flag": "uz.png",
-        "continent": "asia",
-        "transport": ["bus","train"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "washington.png",
-        "city": "Washington",
-        "country": "Unites States of America",
-        "flag": "us.png",
-        "continent": "america",
-        "transport": ["bus","bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "antigua_guatemala.png",
-        "city": "Antigua Guatemala",
-        "country": "Guatemala",
-        "flag": "gt.png",
-        "continent": "america",
-        "transport": ["bus","bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
         "image": "timbuktu.png",
         "city": "Timbuktu",
-        "country": "Mali",
-        "flag": "ml.png",
+        "country": [
+            "Mali"
+        ],
+        "flag": [
+            "ml.png"
+        ],
         "continent": "africa",
-        "transport": ["bus","bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "osaka_castle.png",
-        "city": "Osaka Castle",
-        "country": "Japan",
-        "flag": "jp.png",
-        "continent": "asia",
-        "transport": ["bus","train"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "milforn_sound.png",
-        "city": "Milford Sound",
-        "country": "New Zealand",
-        "flag": "nz.png",
-        "continent": "africa",
-        "transport": ["bus","boat"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "nine_arch_bridge.png",
-        "city": "Nine Arch Bridge",
-        "country": "Sri Lanka",
-        "flag": "lk.png",
-        "continent": "asia",
-        "transport": ["bus","train"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "azadi_tehran.png",
-        "city": "Azadi Tower Tehran",
-        "country": "Iran",
-        "flag": "ir.png",
-        "continent": "asia",
-        "transport": ["bus","bus"],
+        "transport": [
+            "bus",
+            "bus"
+        ],
         "corner_number": "1",
         "corner_font_size": 24
     },
     {
         "image": "hassan_ii_mosque.png",
         "city": "Hassan II Mosque, Casablanca",
-        "country": "Marocco",
-        "flag": "ma.png",
+        "country": [
+            "Marocco"
+        ],
+        "flag": [
+            "ma.png"
+        ],
         "continent": "africa",
-        "transport": ["bus","bus"],
+        "transport": [
+            "bus",
+            "bus"
+        ],
         "corner_number": "1",
         "corner_font_size": 24
     },
     {
         "image": "abu_simbel.png",
         "city": "Abu Simbel",
-        "country": "Egypt",
-        "flag": "eg.png",
+        "country": [
+            "Egypt"
+        ],
+        "flag": [
+            "eg.png"
+        ],
         "continent": "africa",
-        "transport": ["bus","bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "sanaa.png",
-        "city": "Sanaa",
-        "country": "Yemen",
-        "flag": "ye.png",
-        "continent": "asia",
-        "transport": ["bus","bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "lhasa.png",
-        "city": "Lhasa, Tibet",
-        "country": "China",
-        "flag": "cn.png",
-        "continent": "asia",
-        "transport": ["bus","train"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "matterhorn.png",
-        "city": "Matterhorn",
-        "country": "Switzerland",
-        "flag": "ch.png",
-        "continent": "europe",
-        "transport": ["bus","train"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "burj_khalifa.png",
-        "city": "Burj Khalifa, Dubai",
-        "country": "United Arab Emirates",
-        "flag": "ae.png",
-        "continent": "asia",
-        "transport": ["bus","boat"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "bagan.png",
-        "city": "Bagan",
-        "country": "Myanmar",
-        "flag": "my.png",
-        "continent": "asia",
-        "transport": ["bus","bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "barrier_reef.png",
-        "city": "Great Barrier Reef",
-        "country": "Australia",
-        "flag": "au.png",
-        "continent": "africa",
-        "transport": ["boat","boat"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "tikal.png",
-        "city": "Tikal",
-        "country": "Guatemala",
-        "flag": "gt.png",
-        "continent": "america",
-        "transport": ["bus","bus"],
-        "corner_number": "1",
-        "corner_font_size": 24
-    },
-    {
-        "image": "stonehenge.png",
-        "city": "Stonehenge",
-        "country": "United Kindgom",
-        "flag": "uk.png",
-        "continent": "europe",
-        "transport": ["bus","bus"],
+        "transport": [
+            "bus",
+            "bus"
+        ],
         "corner_number": "1",
         "corner_font_size": 24
     },
     {
         "image": "victoria_falls.png",
         "city": "Victoria Falls",
-        "country": "Zambia and Zimbabwe",
-        "flag": "za.png",
+        "country": [
+            "Zambia",
+            "Zimbabwe"
+        ],
+        "flag": [
+            "zm.png",
+            "zw.png"
+        ],
         "continent": "africa",
-        "transport": ["bus","bus"],
+        "transport": [
+            "bus",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "great_zimbabwe.png",
+        "city": "Great Zimbabwe",
+        "country": [
+            "Zimbabwe"
+        ],
+        "flag": [
+            "zw.png"
+        ],
+        "continent": "africa",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "sydney.png",
+        "city": "Sydney Opera",
+        "country": [
+            "Australia"
+        ],
+        "flag": [
+            "au.png"
+        ],
+        "continent": "africa",
+        "transport": [
+            "bus",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "milforn_sound.png",
+        "city": "Milford Sound",
+        "country": [
+            "New Zealand"
+        ],
+        "flag": [
+            "nz.png"
+        ],
+        "continent": "africa",
+        "transport": [
+            "bus",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "barrier_reef.png",
+        "city": "Great Barrier Reef",
+        "country": [
+            "Australia"
+        ],
+        "flag": [
+            "au.png"
+        ],
+        "continent": "africa",
+        "transport": [
+            "boat",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "mexico_city.png",
+        "city": "Mexico City",
+        "country": [
+            "Mexico"
+        ],
+        "flag": [
+            "mx.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "panama_channel.png",
+        "city": "Panama Channel",
+        "country": [
+            "Panama"
+        ],
+        "flag": [
+            "pa.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "train",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "salar_de_uyuni.png",
+        "city": "Salar de Uyuni",
+        "country": [
+            "Bolivia"
+        ],
+        "flag": [
+            "bo.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "washington.png",
+        "city": "Washington",
+        "country": [
+            "Unites States of America"
+        ],
+        "flag": [
+            "us.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "antigua_guatemala.png",
+        "city": "Antigua Guatemala",
+        "country": [
+            "Guatemala"
+        ],
+        "flag": [
+            "gt.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "tikal.png",
+        "city": "Tikal",
+        "country": [
+            "Guatemala"
+        ],
+        "flag": [
+            "gt.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "machu_picchu.png",
+        "city": "Machu Picchu",
+        "country": [
+            "Peru"
+        ],
+        "flag": [
+            "pe.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "bus",
+            "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "easter_island.png",
+        "city": "Easter Island",
+        "country": [
+            "Chile"
+        ],
+        "flag": [
+            "cl.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "boat",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "azadi_tehran.png",
+        "city": "Azadi Tower, Tehran",
+        "country": [
+            "Iran"
+        ],
+        "flag": [
+            "ir.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "socotra.png",
+        "city": "Socotra",
+        "country": [
+            "Yemen"
+        ],
+        "flag": [
+            "ye.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "bagan.png",
+        "city": "Bagan",
+        "country": [
+            "Myanmar"
+        ],
+        "flag": [
+            "my.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "samarkand.png",
+        "city": "Samarkand",
+        "country": [
+            "Uzbekistan"
+        ],
+        "flag": [
+            "uz.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "osaka_castle.png",
+        "city": "Osaka Castle",
+        "country": [
+            "Japan"
+        ],
+        "flag": [
+            "jp.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "nine_arch_bridge.png",
+        "city": "Nine Arch Bridge",
+        "country": [
+            "Sri Lanka"
+        ],
+        "flag": [
+            "lk.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "lhasa.png",
+        "city": "Lhasa, Tibet",
+        "country": [
+            "China"
+        ],
+        "flag": [
+            "cn.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "bali_pura_ulun_danu_bratan.png",
+        "city": "Pura Ulun Danu Bratan",
+        "country": [
+            "Indonesia"
+        ],
+        "flag": [
+            "id.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "wat_rong_khun.png",
+        "city": "Wat Rong Khun",
+        "country": [
+            "Thailand"
+        ],
+        "flag": [
+            "th.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "burj_khalifa.png",
+        "city": "Burj Khalifa, Dubai",
+        "country": [
+            "United Arab Emirates"
+        ],
+        "flag": [
+            "ae.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "sheikh_zayed_mosque.png",
+        "city": "Sheikh Zayed Mosque",
+        "country": [
+            "United Arab Emirates"
+        ],
+        "flag": [
+            "ae.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "train",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "fjadrargljufur.png",
+        "city": "Fjadrargljufur",
+        "country": [
+            "Iceland"
+        ],
+        "flag": [
+            "is.png"
+        ],
+        "continent": "europe",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "holland.png",
+        "city": "Tulip Field",
+        "country": [
+            "Netherlands"
+        ],
+        "flag": [
+            "nl.png"
+        ],
+        "continent": "europe",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "meteora.png",
+        "city": "Meteora",
+        "country": [
+            "Greece"
+        ],
+        "flag": [
+            "gr.png"
+        ],
+        "continent": "europe",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "stonehenge.png",
+        "city": "Stonehenge",
+        "country": [
+            "United Kindgom"
+        ],
+        "flag": [
+            "gb.png"
+        ],
+        "continent": "europe",
+        "transport": [
+            "bus",
+            "bus"
+        ],
         "corner_number": "1",
         "corner_font_size": 24
     },
     {
         "image": "neuschwanstein.png",
         "city": "Neuschwanstein Castle",
-        "country": "Germany",
-        "flag": "de.png",
+        "country": [
+            "Germany"
+        ],
+        "flag": [
+            "de.png"
+        ],
         "continent": "europe",
-        "transport": ["bus","bus"],
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "cervena_lhota.png",
+        "city": "Cervena Lhota",
+        "country": [
+            "Czechia"
+        ],
+        "flag": [
+            "cz.png"
+        ],
+        "continent": "europe",
+        "transport": [
+            "train",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "florence.png",
+        "city": "Florence",
+        "country": [
+            "Italy"
+        ],
+        "flag": [
+            "it.png"
+        ],
+        "continent": "europe",
+        "transport": [
+            "bus",
+            "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "matterhorn.png",
+        "city": "Matterhorn",
+        "country": [
+            "Switzerland"
+        ],
+        "flag": [
+            "ch.png"
+        ],
+        "continent": "europe",
+        "transport": [
+            "bus",
+            "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "skogafoss.png",
+        "city": "Skogafoss",
+        "country": [
+            "Iceland"
+        ],
+        "flag": [
+            "is.png"
+        ],
+        "continent": "europe",
+        "transport": [
+            "bus",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "lofoten.png",
+        "city": "Lofoten",
+        "country": [
+            "Norway"
+        ],
+        "flag": [
+            "no.png"
+        ],
+        "continent": "europe",
+        "transport": [
+            "bus",
+            "boat"
+        ],
         "corner_number": "1",
         "corner_font_size": 24
     }
-    
-    
-    
-    
-    
-    
-
 ]
