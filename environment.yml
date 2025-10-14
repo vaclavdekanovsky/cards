@@ -1,15 +1,13 @@
-name: geo-outlines
+name: travel-game-env
 channels:
   - conda-forge
+  - defaults
 dependencies:
-  - python>=3.10,<3.13
+  - python=3.11
   - geopandas
-  - shapely
-  - fiona
-  - pyproj
   - matplotlib
-  - numpy
-  - pandas
-  - gdal
-  - pip
-  - mkl-service
+  - reportlab
+  - pillow
+  - pdf2image
+  - poppler
+  - svglib

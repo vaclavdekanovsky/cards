@@ -4,12 +4,13 @@ import os
 from shapely.geometry import Polygon
 
 # --- Configuration ---
-# Directory to save the output images
-OUTPUT_DIR = "continent_images"
+# Define input and output directories
+INPUT_DIR = r"C:\Vasa\Cartoon\Travel Game\in\continent_maps"
+OUTPUT_DIR = r"C:\Vasa\Cartoon\Travel Game\out\continent_images"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# The shapefile for continents
-SHAPEFILE = "World_Continents.shp"
+# The shapefile for continents, located in the input directory
+SHAPEFILE = os.path.join(INPUT_DIR, "World_Continents.shp")
 
 # Column in the shapefile that identifies the continents
 CONTINENT_NAME_COLUMN = "CONTINENT"
