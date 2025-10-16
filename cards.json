@@ -1,4 +1,21 @@
 [
+     {
+        "image": "bora_bora.png",
+        "city": "Bora Bora",
+        "country": [
+            "French Polynesia"
+        ],
+        "flag": [
+            "pf.png"
+        ],
+        "continent": "africa",
+        "transport": [
+            "boat",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
     {
         "image": "timbuktu.png",
         "city": "Timbuktu",
@@ -17,13 +34,47 @@
         "corner_font_size": 24
     },
     {
-        "image": "hassan_ii_mosque.png",
-        "city": "Hassan II Mosque, Casablanca",
+        "image": "jemaa_el-fnaa.png",
+        "city": "Jemaa el-Fnaa",
         "country": [
             "Marocco"
         ],
         "flag": [
             "ma.png"
+        ],
+        "continent": "africa",
+        "transport": [
+            "bus",
+            "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "serengeti.png",
+        "city": "Serengeti",
+        "country": [
+            "Tanzania"
+        ],
+        "flag": [
+            "tz.png"
+        ],
+        "continent": "africa",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "danakil_depression.png",
+        "city": "Danakil Depression",
+        "country": [
+            "Ethiopia"
+        ],
+        "flag": [
+            "et.png"
         ],
         "continent": "africa",
         "transport": [
@@ -81,6 +132,7 @@
         "continent": "africa",
         "transport": [
             "bus",
+            "train",
             "boat"
         ],
         "corner_number": "1",
@@ -155,6 +207,39 @@
         "corner_font_size": 24
     },
     {
+        "image": "cholula.png",
+        "city": "Cholula and Popocatépetl",
+        "country": [
+            "Mexico"
+        ],
+        "flag": [
+            "mx.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "bus",
+            "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },{
+        "image": "torres_del_paine.png",
+        "city": "Torres del Paine",
+        "country": [
+            "Chile"
+        ],
+        "flag": [
+            "cl.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "bus",
+            "bus"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
         "image": "salar_de_uyuni.png",
         "city": "Salar de Uyuni",
         "country": [
@@ -172,8 +257,25 @@
         "corner_font_size": 24
     },
     {
-        "image": "washington.png",
-        "city": "Washington",
+        "image": "quebec.png",
+        "city": "Quebec",
+        "country": [
+            "Canada"
+        ],
+        "flag": [
+            "ca.png"
+        ],
+        "continent": "america",
+        "transport": [
+            "bus",
+            "train"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "golden_gate_bridge.png",
+        "city": "Golden Gate Bridge",
         "country": [
             "Unites States of America"
         ],
@@ -183,7 +285,8 @@
         "continent": "america",
         "transport": [
             "bus",
-            "bus"
+            "train",
+            "boat"
         ],
         "corner_number": "1",
         "corner_font_size": 24
@@ -490,7 +593,7 @@
         "continent": "europe",
         "transport": [
             "bus",
-            "bus"
+            "train"
         ],
         "corner_number": "1",
         "corner_font_size": 24
@@ -598,17 +701,35 @@
         "corner_font_size": 24
     },
     {
-        "image": "skogafoss.png",
-        "city": "Skogafoss",
+        "image": "mont_saint_michel.png",
+        "city": "Mont Saint-Michel",
         "country": [
-            "Iceland"
+            "France"
         ],
         "flag": [
-            "is.png"
+            "fr.png"
         ],
         "continent": "europe",
         "transport": [
             "bus",
+            "train",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "cinque_terre.png",
+        "city": "Cinque Terre",
+        "country": [
+            "Italy"
+        ],
+        "flag": [
+            "it.png"
+        ],
+        "continent": "europe",
+        "transport": [
+            "train",
             "boat"
         ],
         "corner_number": "1",

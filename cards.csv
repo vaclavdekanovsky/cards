@@ -1,19 +1,25 @@
 image,city,country,flag,continent,transport,corner_number,corner_font_size
+bora_bora.png,Bora Bora,French Polynesia,pf.png,africa,boat;boat,1,24
 timbuktu.png,Timbuktu,Mali,ml.png,africa,bus;bus,1,24
-hassan_ii_mosque.png,"Hassan II Mosque, Casablanca",Marocco,ma.png,africa,bus;bus,1,24
+jemaa_el-fnaa.png,Jemaa el-Fnaa,Marocco,ma.png,africa,bus;train,1,24
+serengeti.png,Serengeti,Tanzania,tz.png,africa,bus;bus,1,24
+danakil_depression.png,Danakil Depression,Ethiopia,et.png,africa,bus;bus,1,24
 abu_simbel.png,Abu Simbel,Egypt,eg.png,africa,bus;bus,1,24
-victoria_falls.png,Victoria Falls,Zambia;Zimbabwe,zm.png;zw.png,africa,bus;boat,1,24
 great_zimbabwe.png,Great Zimbabwe,Zimbabwe,zw.png,africa,bus;bus,1,24
+victoria_falls.png,Victoria Falls,Zambia;Zimbabwe,zm.png;zw.png,africa,bus;train;boat,1,24
 sydney.png,Sydney Opera,Australia,au.png,africa,bus;boat,1,24
 milforn_sound.png,Milford Sound,New Zealand,nz.png,africa,bus;boat,1,24
 barrier_reef.png,Great Barrier Reef,Australia,au.png,africa,boat;boat,1,24
 mexico_city.png,Mexico City,Mexico,mx.png,america,bus;bus,1,24
-panama_channel.png,Panama Channel,Panama,pa.png,america,train;boat,1,24
+cholula.png,Cholula and Popocatépetl,Mexico,mx.png,america,bus;train,1,24
+torres_del_paine.png,Torres del Paine,Chile,cl.png,america,bus;bus,1,24
 salar_de_uyuni.png,Salar de Uyuni,Bolivia,bo.png,america,bus;bus,1,24
-washington.png,Washington,Unites States of America,us.png,america,bus;bus,1,24
+quebec.png,Quebec,Canada,ca.png,america,bus;train,1,24
+golden_gate_bridge.png,Golden Gate Bridge,Unites States of America,us.png,america,bus;train;boat,1,24
 antigua_guatemala.png,Antigua Guatemala,Guatemala,gt.png,america,bus;bus,1,24
 tikal.png,Tikal,Guatemala,gt.png,america,bus;bus,1,24
 machu_picchu.png,Machu Picchu,Peru,pe.png,america,bus;train,1,24
+panama_channel.png,Panama Channel,Panama,pa.png,america,train;boat,1,24
 easter_island.png,Easter Island,Chile,cl.png,america,boat;boat,1,24
 azadi_tehran.png,"Azadi Tower, Tehran",Iran,ir.png,asia,bus;bus,1,24
 socotra.png,Socotra,Yemen,ye.png,asia,bus;bus,1,24
@@ -27,12 +33,13 @@ wat_rong_khun.png,Wat Rong Khun,Thailand,th.png,asia,bus;boat,1,24
 burj_khalifa.png,"Burj Khalifa, Dubai",United Arab Emirates,ae.png,asia,bus;boat,1,24
 sheikh_zayed_mosque.png,Sheikh Zayed Mosque,United Arab Emirates,ae.png,asia,bus;train;boat,1,24
 fjadrargljufur.png,Fjadrargljufur,Iceland,is.png,europe,bus;bus,1,24
-holland.png,Tulip Field,Netherlands,nl.png,europe,bus;bus,1,24
+holland.png,Tulip Field,Netherlands,nl.png,europe,bus;train,1,24
 meteora.png,Meteora,Greece,gr.png,europe,bus;bus,1,24
 stonehenge.png,Stonehenge,United Kindgom,gb.png,europe,bus;bus,1,24
 neuschwanstein.png,Neuschwanstein Castle,Germany,de.png,europe,bus;bus,1,24
 cervena_lhota.png,Cervena Lhota,Czechia,cz.png,europe,train;bus,1,24
 florence.png,Florence,Italy,it.png,europe,bus;train,1,24
 matterhorn.png,Matterhorn,Switzerland,ch.png,europe,bus;train,1,24
-skogafoss.png,Skogafoss,Iceland,is.png,europe,bus;boat,1,24
+mont_saint_michel.png,Mont Saint-Michel,France,fr.png,europe,bus;train;boat,1,24
+cinque_terre.png,Cinque Terre,Italy,it.png,europe,train;boat,1,24
 lofoten.png,Lofoten,Norway,no.png,europe,bus;boat,1,24
