@@ -120,6 +120,78 @@ def draw_continent(output_name, color, all_continents_data, output_dir):
     plt.close(fig)
 
 
+def create_a4_pdf_with_all_continents(all_continents_data, output_dir, continent_colors):
+    """
+    Creates a single A4 PDF (landscape) with all continents placed correctly
+    on a world map using the Robinson projection, colored according to
+    the provided mapping.
+    """
+    # Landscape A4 in inches: 11.69 x 8.27
+    fig, ax = plt.subplots(1, 1, figsize=(11.69, 8.27))
+    # Fill the page with the axes (no margins)
+    fig.subplots_adjust(left=0, right=1, top=1, bottom=0)
+
+    # World-friendly projection (Robinson)
+    world_crs = "ESRI:54030"
+
+    # Clip mask in geographic coords, then to dataset CRS
+    clip_poly = Polygon([(-180, -85), (180, -85), (180, 85), (-180, 85)])
+    clip_mask_latlon = gpd.GeoDataFrame([1], geometry=[clip_poly], crs="EPSG:4326")
+    clip_mask = clip_mask_latlon.to_crs(all_continents_data.crs)
+
+    # Helper to select names behind each group
+    def names_for_group(group_name):
+        if group_name == "Americas":
+            return ['North America', 'South America']
+        elif group_name == "Oceania":
+            return ['Australia', 'Oceania']
+        else:
+            return [group_name]
+
+    # Build projected geometries per group and plot
+    plotted_bounds = []
+    for group_name, color in continent_colors.items():
+        names = names_for_group(group_name)
+        selection = all_continents_data[all_continents_data[CONTINENT_NAME_COLUMN].isin(names)]
+        if selection.empty:
+            continue
+
+        clipped = gpd.clip(selection, clip_mask)
+        if clipped.empty:
+            continue
+
+        geom = clipped.union_all().buffer(0)
+        if not geom or geom.is_empty:
+            continue
+
+        gs = gpd.GeoSeries([geom], crs=all_continents_data.crs).to_crs(world_crs)
+        gs.plot(ax=ax, facecolor=color, edgecolor=color)
+        plotted_bounds.append(gs.total_bounds)
+
+    # Style and limits
+    ax.set_axis_off()
+    ax.set_aspect('equal')
+
+    if plotted_bounds:
+        # Union of bounds with a small padding
+        xmin = min(b[0] for b in plotted_bounds)
+        ymin = min(b[1] for b in plotted_bounds)
+        xmax = max(b[2] for b in plotted_bounds)
+        ymax = max(b[3] for b in plotted_bounds)
+        dx, dy = xmax - xmin, ymax - ymin
+        # Small padding so shapes don't touch edges
+        pad_x = dx * 0.01 if dx > 0 else 1
+        pad_y = dy * 0.01 if dy > 0 else 1
+        ax.set_xlim([xmin - pad_x, xmax + pad_x])
+        ax.set_ylim([ymin - pad_y, ymax + pad_y])
+
+    output_path = os.path.join(output_dir, "continents_a4.pdf")
+    # Save without tight layout so the PDF keeps true A4 page size
+    plt.savefig(output_path)
+    plt.close(fig)
+    print(f"Saved {output_path}")
+
+
 if __name__ == "__main__":
     # Load configuration from JSON file
     try:
@@ -162,6 +234,10 @@ if __name__ == "__main__":
     # --- Generate Additional Combined Image ---
     print("\n--- Generating Combined Image ---")
     draw_continent("Africa & Oceania", "grey", world_continents, OUTPUT_DIR)
+
+    # --- Generate A4 PDF with all continents ---
+    print("\n--- Generating A4 PDF with all continents ---")
+    create_a4_pdf_with_all_continents(world_continents, OUTPUT_DIR, CONTINENT_COLORS)
 
     print("\nContinent drawing complete.")
     print(f"Images saved in '{OUTPUT_DIR}' directory.")

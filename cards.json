@@ -208,7 +208,7 @@
     },
     {
         "image": "cholula.png",
-        "city": "Cholula and Popocatépetl",
+        "city": "Cholula and Popocatepetl",
         "country": [
             "Mexico"
         ],
@@ -417,7 +417,7 @@
             "Myanmar"
         ],
         "flag": [
-            "my.png"
+            "mm.png"
         ],
         "continent": "asia",
         "transport": [
@@ -747,6 +747,24 @@
         "continent": "europe",
         "transport": [
             "bus",
+            "boat"
+        ],
+        "corner_number": "1",
+        "corner_font_size": 24
+    },
+    {
+        "image": "hoi_an.png",
+        "city": "Hoi An",
+        "country": [
+            "Vietnam"
+        ],
+        "flag": [
+            "vn.png"
+        ],
+        "continent": "asia",
+        "transport": [
+            "bus",
+            "train",
             "boat"
         ],
         "corner_number": "1",
